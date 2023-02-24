@@ -1,14 +1,14 @@
 import propTypes from 'prop-types';
 import styles from './Filter.module.css';
 
-const ContactsFilter = ({ filter, handleChange }) => {
+const ContactsFilter = ({ filter, onChange }) => {
   return (
     <div>
       <h3>Find contacts by name</h3>
       <input
         type="text"
         name="filter"
-        onChange={handleChange}
+        onChange={onChange}
         value={filter}
         className={styles.filter}
         placeholder="Filter"
@@ -18,7 +18,7 @@ const ContactsFilter = ({ filter, handleChange }) => {
 };
 
 ContactsFilter.propTypes = {
-  handleChange: propTypes.func.isRequired,
+  onChange: propTypes.func.isRequired,
   filter: propTypes.string.isRequired,
 };
 

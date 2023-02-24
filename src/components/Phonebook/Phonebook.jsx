@@ -15,6 +15,20 @@ class Phonebook extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const localContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (localContacts) {
+      this.setState({ contacts: localContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = contact => {
     if (this.isDuplicate(contact)) {
       return alert(
@@ -91,15 +105,6 @@ class Phonebook extends Component {
             <FormAddContact onSubmit={addContact} />
           </div>
           <div>
-            {/* <h3>Find contacts by name</h3>
-            <input
-              type="text"
-              name="filter"
-              onChange={handleChange}
-              value={filter}
-              className={styles.filter}
-              placeholder="Filter"
-            /> */}
             <ContactsFilter onChange={handleChange} filter={filter} />
             <ContactList items={contacts} removeContact={removeContact} />
           </div>
